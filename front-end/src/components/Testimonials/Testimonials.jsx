@@ -1,42 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { client, urlFor } from "../../client";
 import "./Testimonials.css";
-import { rectangle19, rectangle20, rectangle21 } from "../../assets/index";
 
 const Testimonials = () => {
+  const [testimonials, setTestimonials] = useState([]);
+
+  useEffect(() => {
+    const query = '*[_type == "testimonials"][0..2]';
+
+    client.fetch(query).then((data) => {
+      setTestimonials(data);
+    });
+  }, []);
   return (
     <section id="testimonials" className="dark">
       <div className="wrapper">
         <h2>What our students say?</h2>
         <div className="content-container">
-          <div className="testimonial">
-            <img src={rectangle19} alt="" />
-            <div className="reviewer-details">
-              <div className="name">Peter Adams</div>
-              <div className="company">Google</div>
-              <div className="review">
-                This is a great course. I got to learn a lot.
+          {testimonials.map((testimonial) => (
+            <div className="testimonial">
+              <img src={urlFor(testimonial.image)} alt="" />
+              <div className="reviewer-details">
+                <div className="name">{testimonial.name}</div>
+                <div className="company">{testimonial.company}</div>
+                <div className="review">{testimonial.message}</div>
               </div>
             </div>
-          </div>
-          <div className="testimonial">
-            <img src={rectangle20} alt="" />
-            <div className="reviewer-details">
-              <div className="name">Robert Fox</div>
-              <div className="company">X</div>
-              <div className="review">
-                I got to learn a lot about Music Production with this course.
-                Thanks :)
-              </div>
-            </div>
-          </div>
-          <div className="testimonial">
-            <img src={rectangle21} alt="" />
-            <div className="reviewer-details">
-              <div className="name">Emily Smith</div>
-              <div className="company">Apple</div>
-              <div className="review">Awesome! Great job!!</div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

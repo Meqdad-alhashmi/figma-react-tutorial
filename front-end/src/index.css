@@ -1,7 +1,7 @@
 :root {
   --dark-color: #181e1e;
   --red-color: #e63946;
-  --pink-color: #e63946;
+  --pink-color: #ff6864;
   --yellow-color: #ffca28;
 }
 
@@ -14,6 +14,10 @@
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .wrapper {
@@ -67,4 +71,29 @@ section h2.light::after {
 
 section .content-container {
   display: flex;
+}
+
+/* Tablet Version */
+
+@media (max-width: 1040px) {
+  .wrapper {
+    max-width: 694px;
+  }
+}
+
+/* Smartphone Version  */
+
+@media (max-width: 720px) {
+  .wrapper {
+    padding: 0 32px;
+  }
+
+  section h2 {
+    font-size: 24px;
+  }
+
+  section h2::after {
+    width: 50px;
+    bottom: 0;
+  }
 }
